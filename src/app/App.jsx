@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import useFetch from '../helpers/hooks/useFetch';
-import { Stack, Container, Typography, Grid, Pagination } from '@mui/material';
+import { Stack, Container, Typography, Pagination } from '@mui/material';
 import SearchBar from '../components/searchBar/SearchBar';
-import ImageCard from '../components/imageCard/ImageCard';
+import ImageList from '../components/imageList/ImageList';
+import useFetch from '../helpers/hooks/useFetch';
 
 const App = () => {
   const [query, setQuery] = useState('');
@@ -31,29 +31,26 @@ const App = () => {
     });
   }
 
-  let content = [];
-  if (data !== undefined) {
-    content = data.hits.map(image => <ImageCard image={image} loading={loading} />);
-  }
-
-
   return (
     <Container maxWidth="xl">
       <Stack direction="column" alignItems="center" spacing={2}>
         <SearchBar updateQuery={updateQuery} />
 
-        {error && <Typography variant="h4">Server error</Typography>}
+        {error && <Typography variant="h4" align="center">Server error</Typography>}
+
         {data &&
           <Stack direction="column" alignItems="center" spacing={2}>
-            <Typography variant="h4">{2}</Typography>
 
-            <Grid container justifyContent="center" rowSpacing={2} columnSpacing={{ xs: 0, sm: 2, md: 2 }}>
-              {content}
-            </Grid>
+            <Typography variant="h4" align="center" sx={{
+              fontSize: { xs: "16px", sm: "24px", md: "32px", xl: "48px" }
+            }}>You can see {data.totalHits} images for {query}</Typography>
 
-            {(data.totalHits / 20) > 1 ? <Pagination count={Math.round(data.totalHits / 20)} page={pageNumber} size="small" shape="rounded" variant="outlined" onChange={handlePagination} sx={{ paddingBottom: "40px" }} /> : null}
+            <ImageList data={data} loading={loading} />
+
+            {(data.totalHits / 20) > 1 ? <Pagination count={Math.round(data.totalHits / 20)} page={pageNumber} size="small" shape="rounded" variant="outlined" onChange={handlePagination} /> : null}
+
+            <Typography variant="body" sx={{ paddingBottom: 4 }} align="center">All images are provided by <a href="https://pixabay.com" target="_blank" rel="noreferrer">Pixabay</a>.</Typography>
           </Stack>}
-
       </Stack>
     </Container>
   );

@@ -1,16 +1,14 @@
 import React from 'react';
+import { Grid } from '@mui/material';
+import ImageCard from '../imageCard/ImageCard';
 
-const ImageList = () => {
+const ImageList = ({ data = [], loading }) => {
+    const content = data.hits.map(image => <ImageCard image={image} loading={loading} />);
+
     return (
-        // <Stack direction="column" alignItems="center" spacing={2}>
-        //     <Typography variant="h4">{2}</Typography>
-
-        //     <Grid container justifyContent="center" rowSpacing={2} columnSpacing={{ xs: 0, sm: 2, md: 2 }}>
-        //         {content}
-        //     </Grid>
-
-        //     {(data.totalHits / 20) > 1 ? <Pagination count={Math.round(data.totalHits / 20)} page={pageNumber} size="small" shape="rounded" variant="outlined" onChange={handlePagination} sx={{ paddingBottom: "40px" }} /> : null}
-        // </Stack>
+        <Grid container justifyContent="center" rowSpacing={2} columnSpacing={{ xs: 0, sm: 2, md: 2 }}>
+            {content}
+        </Grid>
     )
 }
 
