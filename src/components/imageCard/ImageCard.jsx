@@ -3,7 +3,7 @@ import { Stack, Typography, Card, CardContent, CardMedia, Avatar, Grid, Skeleton
 
 const ImageCard = ({ image, loading }) => {
     return (
-        <Grid item justifyContent="center" key={image.id} >
+        <Grid item justifyContent="center">
             <Card sx={{ width: "250px", padding: "16px", "&:hover": { boxShadow: "rgba(0, 0, 0, 1) 0px 3px 8px" } }}>
                 {loading ? <Skeleton variant="rectangular" width="250px" height="250px" /> :
                     <CardMedia
@@ -11,7 +11,7 @@ const ImageCard = ({ image, loading }) => {
                         height="250px"
                         width="250px"
                         image={image.previewURL}
-                    // alt=""
+                        alt={`an image with ${image.tags}`}
                     />}
                 <CardContent>
                     <Stack direction="row" alignItems="center" justifyContent="space-between">

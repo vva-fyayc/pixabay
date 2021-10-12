@@ -15,10 +15,7 @@ const useFetch = (url) => {
                 const json = await response.json();
 
                 setLoading(false);
-
                 setData(json);
-
-                // setHeadingText(`Showing ${pageNumber * 20} out of 500 results for ${query}`);
             } catch (error) {
                 if (error.name !== 'AbortError') {
                     setLoading(false);

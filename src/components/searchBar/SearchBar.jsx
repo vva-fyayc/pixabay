@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Stack, TextField, Button, Box } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { update } from '../../store/reducers/querySlice';
 
-const SearchBar = ({updateQuery}) => {
+const SearchBar = ({ updateQuery }) => {
     const [query, setQuery] = useState('');
     const [helperText, setHelperText] = useState('');
     const [hasError, setHasError] = useState(false);
-    const dispatch = useDispatch();
+
 
     const handleChange = (e) => {
         setQuery(e.target.value);
@@ -19,13 +17,10 @@ const SearchBar = ({updateQuery}) => {
         if (hasError || query.length === 0) {
             changeInputStatus('Please enter a search word.', true);
         } else {
-            dispatch(update(query));
-            
             updateQuery(query);
-            // console.log('call api');
         }
     }
-    
+
     const changeInputStatus = (text, flag) => {
         setHelperText(text);
         setHasError(flag);
