@@ -12,6 +12,7 @@ const ImageCard = ({ image, loading }) => {
                         width="250px"
                         image={image.previewURL}
                         alt={`an image with ${image.tags}`}
+                        data-testid="image"
                     />}
                 <CardContent>
                     <Stack direction="row" alignItems="center" justifyContent="space-between">
@@ -21,7 +22,7 @@ const ImageCard = ({ image, loading }) => {
 
                         {loading ? <Skeleton variant="circular">
                             <Avatar />
-                        </Skeleton> : <Avatar alt={image.user} src={image.userImageURL} />
+                        </Skeleton> : <Avatar alt={image.user} src={image.userImageURL} data-testid="author-avatar"/>
                         }
                     </Stack>
 
