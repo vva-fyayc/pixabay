@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Stack, Container, Typography, Pagination } from '@mui/material';
 import SearchBar from '../components/searchBar/SearchBar';
 import ImageList from '../components/imageList/ImageList';
-import useFetch from '../helpers/hooks/useFetch';
+import useAxios from '../helpers/hooks/use-axios';
 
 const App = () => {
   const [query, setQuery] = useState('');
   const [pageNumber, setPageNumber] = useState(1);
   const [url, setUrl] = useState('');
-  const { data, error, loading } = useFetch(url);
+  const { data, error, loading } = useAxios(url);
 
   const updateQuery = (value) => {
     setQuery(value);
@@ -17,7 +17,6 @@ const App = () => {
 
   useEffect(() => {
     if (query === '') return;
-
     setUrl(`https://pixabay.com/api/?key=23741766-e2ceb19faad22ef3d335618c0&q=${query}&image_type=photo&page=${pageNumber}`);
   }, [query, pageNumber]);
 
@@ -36,7 +35,7 @@ const App = () => {
       <Stack direction="column" alignItems="center" spacing={2}>
         <SearchBar updateQuery={updateQuery} />
 
-        {error && <Typography variant="h4" align="center">Server error</Typography>}
+        {error && <Typography variant="h4" align="center">{error}</Typography>}
 
         {data &&
           <Stack direction="column" alignItems="center" spacing={2}>

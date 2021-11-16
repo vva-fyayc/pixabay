@@ -22,7 +22,7 @@ const ImageCard = ({ image, loading }) => {
 
                         {loading ? <Skeleton variant="circular">
                             <Avatar />
-                        </Skeleton> : <Avatar alt={image.user} src={image.userImageURL} data-testid="author-avatar"/>
+                        </Skeleton> : <Avatar alt={image.user} src={image.userImageURL} data-testid="author-avatar" />
                         }
                     </Stack>
 
