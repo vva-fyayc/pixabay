@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid } from '@mui/material';
-import ImageCard from '../imageCard/ImageCard';
+import ImageCard from '../ImageCard/ImageCard';
 
 const ImageList = ({ data = [], loading }) => {
     const content = data.hits.map(image => <ImageCard key={image.id} image={image} loading={loading} />);
